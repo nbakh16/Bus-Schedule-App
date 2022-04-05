@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/scheduleListFragment2">
+    app:startDestination="@id/scheduleListFragment">
     <fragment
-        android:id="@+id/scheduleListFragment2"
+        android:id="@+id/scheduleListFragment"
         android:name="com.nbakh.busschedule.ScheduleListFragment"
         android:label="fragment_schedule_list"
         tools:layout="@layout/fragment_schedule_list" >
         <action
-            android:id="@+id/action_scheduleListFragment2_to_newScheduleFragment"
+            android:id="@+id/action_scheduleListFragment_to_newScheduleFragment"
             app:destination="@id/newScheduleFragment" />
     </fragment>
     <fragment
