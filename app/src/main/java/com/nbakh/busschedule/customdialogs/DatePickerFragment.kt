@@ -24,7 +24,7 @@ class DatePickerFragment(val callback: (String) -> Unit) : DialogFragment(), Dat
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         val c = Calendar.getInstance()
         c.set(year, month, dayOfMonth)
-        val selectedDate = getFormattedDateTime(c.timeInMillis, "dd/MM/yyyy")
+        val selectedDate = getFormattedDateTime(c.timeInMillis, "dd MMM, yyyy")
         callback(selectedDate)
     }
 

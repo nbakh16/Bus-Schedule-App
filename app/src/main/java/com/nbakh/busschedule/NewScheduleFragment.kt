@@ -3,6 +3,7 @@ package com.nbakh.busschedule
 import android.app.DatePickerDialog
 import android.app.ProgressDialog.show
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,10 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.RadioButton
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.nbakh.busschedule.customdialogs.DatePickerFragment
+import com.nbakh.busschedule.customdialogs.TimePickerFragment
 import com.nbakh.busschedule.databinding.FragmentNewScheduleBinding
 
 class NewScheduleFragment : Fragment() {
@@ -35,11 +39,53 @@ class NewScheduleFragment : Fragment() {
                 binding.showDateTV.text = it
             }.show(childFragmentManager, null)
         }
-        binding.timeBtn.setOnClickListener {
 
+        binding.timeBtn.setOnClickListener {
+            TimePickerFragment {
+                binding.showTimeTV.text = it
+            }.show(childFragmentManager, null)
+        }
+
+        binding.saveBtn.setOnClickListener {
+            saveBusInfo()
         }
 
         return binding.root
+    }
+
+    private fun saveBusInfo() {
+        val name = binding.busNameInputET.text.toString()
+        val date = binding.showDateTV.text.toString()
+        val time = binding.showTimeTV.text.toString()
+
+        //Validating
+        if(name.isEmpty()){
+            Toast.makeText(requireActivity(), "Please enter bus name!", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if(from == to){
+            Toast.makeText(requireActivity(), "Both destination cannot be same!", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if(date.isEmpty()){
+            Toast.makeText(requireActivity(), "Please select departure date!", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if(time.isEmpty()){
+            Toast.makeText(requireActivity(), "Please select departure time!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val schedule = BusSchedule(
+            id = System.currentTimeMillis(),
+            busName =  name,
+            from = from,
+            to = to,
+            departureDate = date,
+            departureTime = time,
+            busType = busType
+        )
+        Log.d("NewScheduleFragment", "saveBusInfo: $schedule")
     }
 
     private fun initSpinner() {
