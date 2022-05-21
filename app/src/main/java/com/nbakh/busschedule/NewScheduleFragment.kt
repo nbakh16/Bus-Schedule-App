@@ -85,6 +85,8 @@ class NewScheduleFragment : Fragment() {
             departureTime = time,
             busType = busType
         )
+        scheduleList.add(schedule)
+        findNavController().navigate(R.id.action_newScheduleFragment_to_scheduleListFragment)
         Log.d("NewScheduleFragment", "saveBusInfo: $schedule")
     }
 

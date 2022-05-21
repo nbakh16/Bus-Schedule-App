@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.nbakh.busschedule.adapters.ScheduleAdapter
 import com.nbakh.busschedule.databinding.FragmentScheduleListBinding
 
 class ScheduleListFragment : Fragment() {
@@ -16,7 +18,13 @@ class ScheduleListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentScheduleListBinding.inflate(inflater, container, false);
+        binding = FragmentScheduleListBinding.inflate(inflater, container, false)
+
+        val adapter = ScheduleAdapter()
+        binding.scheduleRV.layoutManager = LinearLayoutManager(requireActivity())
+        binding.scheduleRV.adapter = adapter
+        adapter.submitList(scheduleList)
+
         binding.addScheduleBtn.setOnClickListener {
             findNavController().navigate(R.id.action_scheduleListFragment_to_newScheduleFragment)
         }
