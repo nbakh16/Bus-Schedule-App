@@ -12,13 +12,15 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.nbakh.busschedule.customdialogs.DatePickerFragment
 import com.nbakh.busschedule.customdialogs.TimePickerFragment
 import com.nbakh.busschedule.databinding.FragmentNewScheduleBinding
+import com.nbakh.busschedule.viewmodels.ScheduleViewModel
 
 class NewScheduleFragment : Fragment() {
-
+    private val viewModel : ScheduleViewModel by activityViewModels()
     private lateinit var binding: FragmentNewScheduleBinding
 
     private var from = ""
@@ -85,7 +87,7 @@ class NewScheduleFragment : Fragment() {
             departureTime = time,
             busType = busType
         )
-        scheduleList.add(schedule)
+        viewModel.addSchedule(schedule) //pass to viewmodel
         findNavController().navigate(R.id.action_newScheduleFragment_to_scheduleListFragment)
         Log.d("NewScheduleFragment", "saveBusInfo: $schedule")
     }
