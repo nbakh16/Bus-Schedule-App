@@ -88,9 +88,11 @@ class NewScheduleFragment : Fragment() {
             busType = busType
         )
 
-        BusScheduleDB.getDB(requireActivity())
-            .getScheduleDao()
-            .addSchedule(schedule)
+//        BusScheduleDB.getDB(requireActivity())
+//            .getScheduleDao()
+//            .addSchedule(schedule)
+
+
 
         viewModel.addSchedule(schedule) //pass to viewmodel
         findNavController().navigate(R.id.action_newScheduleFragment_to_scheduleListFragment)
