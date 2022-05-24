@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.nbakh.busschedule.BusSchedule
 import com.nbakh.busschedule.scheduleList
 
-class ScheduleViewModel : ViewModel() {
+class ScheduleViewModel() : ViewModel() {
     fun addSchedule(schedule: BusSchedule) {
         scheduleList.add(schedule)
     }
