@@ -27,7 +27,11 @@ class ScheduleListFragment : Fragment() {
         val adapter = ScheduleAdapter()
         binding.scheduleRV.layoutManager = LinearLayoutManager(requireActivity())
         binding.scheduleRV.adapter = adapter
-        adapter.submitList(viewModel.getAllSchedule())
+
+        viewModel.getAllSchedule().observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
+        //adapter.submitList(viewModel.getAllSchedule())
 
         binding.addScheduleBtn.setOnClickListener {
             findNavController().navigate(R.id.action_scheduleListFragment_to_newScheduleFragment)

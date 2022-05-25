@@ -16,7 +16,7 @@ abstract class BusScheduleDB : RoomDatabase(){
         fun getDB(context : Context) : BusScheduleDB {
             if(db == null) {
                 db = Room.databaseBuilder(context, BusScheduleDB::class.java, "bus_schedule_db")
-                    .allowMainThreadQueries()
+                    //.allowMainThreadQueries() //removed db operation from mainthread for better performance
                     .build()
                 return db!!
             }

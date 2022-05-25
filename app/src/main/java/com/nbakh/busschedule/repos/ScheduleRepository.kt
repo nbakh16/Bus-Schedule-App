@@ -1,20 +1,21 @@
 package com.nbakh.busschedule.repos
 
+import androidx.lifecycle.LiveData
 import com.nbakh.busschedule.BusSchedule
 import com.nbakh.busschedule.daos.BusScheduleDao
 
 class ScheduleRepository(val busScheduleDao: BusScheduleDao) {
-    fun addSchedule(busSchedule: BusSchedule) {
+    suspend fun addSchedule(busSchedule: BusSchedule) {
         busScheduleDao.addSchedule(busSchedule)
     }
 
-    fun updateSchedule(busSchedule: BusSchedule) {
+    suspend fun updateSchedule(busSchedule: BusSchedule) {
         busScheduleDao.updateSchedule(busSchedule)
     }
 
-    fun deleteSchedule(busSchedule: BusSchedule) {
+    suspend fun deleteSchedule(busSchedule: BusSchedule) {
         busScheduleDao.deleteSchedule(busSchedule)
     }
 
-    fun getAllSchedule() : List<BusSchedule> = busScheduleDao.getAllSchedule()
+    fun getAllSchedule() : LiveData<List<BusSchedule>> = busScheduleDao.getAllSchedule()
 }

@@ -2,10 +2,13 @@ package com.nbakh.busschedule.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
 import com.nbakh.busschedule.BusSchedule
 import com.nbakh.busschedule.BusScheduleDB
 import com.nbakh.busschedule.repos.ScheduleRepository
 import com.nbakh.busschedule.scheduleList
+import kotlinx.coroutines.launch
 
 class ScheduleViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -17,18 +20,24 @@ class ScheduleViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun addSchedule(busSchedule: BusSchedule) {
-        repository.addSchedule(busSchedule)
+        viewModelScope.launch {
+            repository.addSchedule(busSchedule)
+        }
     }
 
     fun updateSchedule(busSchedule: BusSchedule) {
-        repository.updateSchedule(busSchedule)
+        viewModelScope.launch {
+            repository.updateSchedule(busSchedule)
+        }
     }
 
     fun deleteSchedule(busSchedule: BusSchedule) {
-        repository.deleteSchedule(busSchedule)
+        viewModelScope.launch {
+            repository.deleteSchedule(busSchedule)
+        }
     }
 
-    fun getAllSchedule() : List<BusSchedule> = repository.getAllSchedule()
+    fun getAllSchedule() : LiveData<List<BusSchedule>> = repository.getAllSchedule()
 
 //    fun addSchedule(schedule: BusSchedule) {
 //        scheduleList.add(schedule)
