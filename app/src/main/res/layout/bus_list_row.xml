@@ -23,16 +23,30 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/dark_green"
-                android:paddingStart="20dp"
-                tools:text="Bus Name"
-                android:text="@{schedule.busName}"
-                android:textSize="24sp"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/dark_green"
+                    android:paddingStart="20dp"
+                    tools:text="Bus Name"
+                    android:text="@{schedule.busName}"
+                    android:textSize="24sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/menuBtn"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_weight="0"
+                    android:src="@drawable/ic_baseline_more_vert_24"/>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"

@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nbakh.busschedule.adapters.RowAction
 import com.nbakh.busschedule.adapters.ScheduleAdapter
 import com.nbakh.busschedule.databinding.FragmentScheduleListBinding
 import com.nbakh.busschedule.viewmodels.ScheduleViewModel
@@ -24,7 +26,9 @@ class ScheduleListFragment : Fragment() {
     ): View? {
         binding = FragmentScheduleListBinding.inflate(inflater, container, false)
 
-        val adapter = ScheduleAdapter()
+        val adapter = ScheduleAdapter{schedule, action ->
+            performRowAction(schedule, action)
+        }
         binding.scheduleRV.layoutManager = LinearLayoutManager(requireActivity())
         binding.scheduleRV.adapter = adapter
 
@@ -38,6 +42,17 @@ class ScheduleListFragment : Fragment() {
         }
         return binding.root
 
+    }
+
+    private fun performRowAction(schedule: BusSchedule, action : RowAction) {
+        when(action) {
+            RowAction.EDIT -> {
+
+            }
+            RowAction.DELETE -> {
+                viewModel.deleteSchedule(schedule)
+            }
+        }
     }
 
 }
