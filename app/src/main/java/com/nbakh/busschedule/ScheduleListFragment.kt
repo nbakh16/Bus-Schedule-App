@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nbakh.busschedule.adapters.RowAction
 import com.nbakh.busschedule.adapters.ScheduleAdapter
+import com.nbakh.busschedule.customdialogs.MyAlertDialog
 import com.nbakh.busschedule.databinding.FragmentScheduleListBinding
 import com.nbakh.busschedule.viewmodels.ScheduleViewModel
 
@@ -50,7 +51,16 @@ class ScheduleListFragment : Fragment() {
 
             }
             RowAction.DELETE -> {
-                viewModel.deleteSchedule(schedule)
+                //viewModel.deleteSchedule(schedule)
+                MyAlertDialog(
+                    icon = R.drawable.ic_delete_forever,
+                    title = "Deleting ${schedule.busName}!",
+                    message = "Are you sure to delete this item?",
+                    posButtonText = "Yes",
+                    negButtonText = "No"
+                ) {
+                    viewModel.deleteSchedule(schedule)
+                }.show(childFragmentManager, null)
             }
         }
     }
