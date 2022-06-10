@@ -12,7 +12,7 @@ val busTypeBusiness = "Business"
 @Entity(tableName = "tbl_schedule")
 data class BusSchedule(
     @PrimaryKey(autoGenerate = true)
-    val id: Long,
+    var id: Long,
     @ColumnInfo(name = "bus_name")
     val busName: String,
     val from: String,
@@ -23,6 +23,7 @@ data class BusSchedule(
     val departureTime: String,
     @ColumnInfo(name = "bus_type")
     val busType: String,
-)
+) {
+}
 
 val scheduleList = mutableListOf<BusSchedule>()

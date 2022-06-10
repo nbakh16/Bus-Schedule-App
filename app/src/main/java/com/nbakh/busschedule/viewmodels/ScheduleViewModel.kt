@@ -39,6 +39,8 @@ class ScheduleViewModel(application: Application) : AndroidViewModel(application
 
     fun getAllSchedule() : LiveData<List<BusSchedule>> = repository.getAllSchedule()
 
+    fun getAllScheduleByID(id: Long) = repository.getAllScheduleByID(id)
+
 //    fun addSchedule(schedule: BusSchedule) {
 //        scheduleList.add(schedule)
 //    }

@@ -18,4 +18,6 @@ class ScheduleRepository(val busScheduleDao: BusScheduleDao) {
     }
 
     fun getAllSchedule() : LiveData<List<BusSchedule>> = busScheduleDao.getAllSchedule()
+
+    fun getAllScheduleByID(id: Long) = busScheduleDao.getAllScheduleByID(id)
 }

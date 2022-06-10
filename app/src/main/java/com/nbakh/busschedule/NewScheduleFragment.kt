@@ -26,6 +26,7 @@ class NewScheduleFragment : Fragment() {
     private var from = ""
     private var to = ""
     private var busType = busTypeEconomy
+    private var id: Long? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +36,12 @@ class NewScheduleFragment : Fragment() {
 
         initSpinner()
         initBusTypeRadioGroup()
+
+        id = arguments?.getLong("id")
+        viewModel.getAllScheduleByID(id!!).observe(viewLifecycleOwner){
+            setDataForEditing(it)
+        }
+
 
         binding.dateBtn.setOnClickListener {
             DatePickerFragment {
@@ -53,6 +60,22 @@ class NewScheduleFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun setDataForEditing(it: BusSchedule) {
+        binding.saveBtn.text = "UPDATE"
+
+        binding.busNameInputET.setText(it.busName)
+        binding.showDateTV.setText(it.departureDate)
+        binding.showTimeTV.setText(it.departureTime)
+        val fromIndex = cityList.indexOf(it.from)
+        val toIndex = cityList.indexOf(it.to)
+        binding.citySpinnerFrom.setSelection(fromIndex)
+        binding.citySpinnerTo.setSelection(toIndex)
+        if(it.busType == busTypeEconomy)
+            binding.busTypeRG.check(R.id.economyRB)
+        else
+            binding.busTypeRG.check(R.id.businessRB)
     }
 
     private fun saveBusInfo() {
@@ -92,9 +115,12 @@ class NewScheduleFragment : Fragment() {
 //            .getScheduleDao()
 //            .addSchedule(schedule)
 
-
-
-        viewModel.addSchedule(schedule) //pass to viewmodel
+        if(id != null){
+            schedule.id = id!!
+            viewModel.updateSchedule(schedule)
+        }
+        else
+            viewModel.addSchedule(schedule) //pass to viewmodel
         findNavController().navigate(R.id.action_newScheduleFragment_to_scheduleListFragment)
         Log.d("NewScheduleFragment", "saveBusInfo: $schedule")
     }

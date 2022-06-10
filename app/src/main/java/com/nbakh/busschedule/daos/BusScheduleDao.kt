@@ -17,4 +17,7 @@ interface BusScheduleDao {
 
     @Query("select * from tbl_schedule")
     fun getAllSchedule() : LiveData<List<BusSchedule>>
+
+    @Query("select * from tbl_schedule where id = :id")
+    fun getAllScheduleByID(id: Long) : LiveData<BusSchedule>
 }

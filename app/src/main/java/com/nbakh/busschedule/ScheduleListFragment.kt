@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -48,7 +49,8 @@ class ScheduleListFragment : Fragment() {
     private fun performRowAction(schedule: BusSchedule, action : RowAction) {
         when(action) {
             RowAction.EDIT -> {
-
+                val bundle = bundleOf("id" to schedule.id)
+                findNavController().navigate(R.id.action_scheduleListFragment_to_newScheduleFragment, bundle)
             }
             RowAction.DELETE -> {
                 //viewModel.deleteSchedule(schedule)
